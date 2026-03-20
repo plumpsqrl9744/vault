@@ -1,0 +1,622 @@
+/* Pretty Mermaid Plugin Styles */
+
+/* Base enhancements for all Mermaid diagrams */
+.pretty-mermaid-enhanced {
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background: var(--background-secondary);
+}
+
+.pretty-mermaid-enhanced:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Fix common sizing issues */
+.pretty-mermaid-enhanced svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Classic Theme - Official Mermaid Colors */
+.pretty-mermaid-enhanced.pretty-mermaid-classic {
+  border: 2px solid #9370DB;
+  background: white !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif;
+  font-size: 16px;
+}
+
+.pretty-mermaid-classic .node rect,
+.pretty-mermaid-classic .node circle,
+.pretty-mermaid-classic .node ellipse,
+.pretty-mermaid-classic .node polygon {
+  fill: #ECECFF !important;
+  stroke: #9370DB !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .node .label {
+  color: #333 !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+  font-size: 16px !important;
+}
+
+.pretty-mermaid-classic .edgePath .path {
+  stroke: #333333 !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .edgeLabel {
+  background: rgba(232, 232, 232, 0.8) !important;
+  color: #333 !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+  border-radius: 4px !important;
+}
+
+/* Secondary nodes (like decision diamonds) */
+.pretty-mermaid-classic .node:nth-child(even) rect,
+.pretty-mermaid-classic .node:nth-child(even) circle,
+.pretty-mermaid-classic .node:nth-child(even) ellipse,
+.pretty-mermaid-classic .node:nth-child(even) polygon {
+  fill: #ffffde !important;
+  stroke: #aaaa33 !important;
+}
+
+/* Sequence diagram styling */
+.pretty-mermaid-classic .actor {
+  fill: #ECECFF !important;
+  stroke: #9370DB !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .actor-line {
+  stroke: #333333 !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-classic .messageLine0,
+.pretty-mermaid-classic .messageLine1 {
+  stroke: #333333 !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .messageText {
+  fill: #333 !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+}
+
+.pretty-mermaid-classic .loopText {
+  fill: #333 !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+}
+
+.pretty-mermaid-classic .loopLine {
+  stroke: #9370DB !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .note {
+  fill: #ffffde !important;
+  stroke: #aaaa33 !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .activation0,
+.pretty-mermaid-classic .activation1,
+.pretty-mermaid-classic .activation2 {
+  fill: #f4f4f4 !important;
+  stroke: #9370DB !important;
+  stroke-width: 1px !important;
+}
+
+/* Gantt chart styling */
+.pretty-mermaid-classic .section0,
+.pretty-mermaid-classic .section1,
+.pretty-mermaid-classic .section2 {
+  fill: #ECECFF !important;
+  stroke: #9370DB !important;
+}
+
+.pretty-mermaid-classic .task0,
+.pretty-mermaid-classic .task1,
+.pretty-mermaid-classic .task2,
+.pretty-mermaid-classic .task3 {
+  fill: #ECECFF !important;
+  stroke: #9370DB !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .taskText0,
+.pretty-mermaid-classic .taskText1,
+.pretty-mermaid-classic .taskText2,
+.pretty-mermaid-classic .taskText3,
+.pretty-mermaid-classic .taskTextOutsideRight,
+.pretty-mermaid-classic .taskTextOutsideLeft {
+  fill: #333 !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+}
+
+.pretty-mermaid-classic .today {
+  fill: none !important;
+  stroke: #DB5461 !important;
+  stroke-width: 2px !important;
+}
+
+/* Class diagram styling */
+.pretty-mermaid-classic .classBox {
+  fill: #ECECFF !important;
+  stroke: #9370DB !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .classTitleText {
+  fill: #333 !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+  font-weight: bold !important;
+}
+
+.pretty-mermaid-classic .classText {
+  fill: #333 !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+}
+
+.pretty-mermaid-classic .relation {
+  stroke: #333333 !important;
+  stroke-width: 2px !important;
+}
+
+/* State diagram styling */
+.pretty-mermaid-classic .state-start,
+.pretty-mermaid-classic .state-end {
+  fill: #333 !important;
+}
+
+.pretty-mermaid-classic .statediagram-state rect {
+  fill: #ECECFF !important;
+  stroke: #9370DB !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .transition {
+  stroke: #333333 !important;
+  stroke-width: 2px !important;
+}
+
+/* Pie chart styling */
+.pretty-mermaid-classic .pieTitleText {
+  fill: #333 !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.pretty-mermaid-classic .slice {
+  stroke-width: 2px !important;
+  stroke: white !important;
+}
+
+/* ER diagram styling */
+.pretty-mermaid-classic .er.entityBox {
+  fill: #ECECFF !important;
+  stroke: #9370DB !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .er.attributeBoxEven,
+.pretty-mermaid-classic .er.attributeBoxOdd {
+  fill: #f9f9f9 !important;
+  stroke: #9370DB !important;
+  stroke-width: 1px !important;
+}
+
+/* Subgraph styling */
+.pretty-mermaid-classic .cluster rect {
+  fill: #ffffde !important;
+  stroke: #aaaa33 !important;
+  stroke-width: 2px !important;
+  rx: 5px !important;
+}
+
+.pretty-mermaid-classic .cluster .cluster-label {
+  fill: #333 !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+  font-weight: bold !important;
+}
+
+.pretty-mermaid-classic .cluster text {
+  fill: #333 !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+}
+
+/* Flowchart specific styling (extends node styling) */
+.pretty-mermaid-classic .flowchart-link {
+  stroke: #333333 !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .marker {
+  fill: #333333 !important;
+  stroke: #333333 !important;
+}
+
+/* Class diagram specific elements */
+.pretty-mermaid-classic .classGroup rect {
+  fill: #ECECFF !important;
+  stroke: #9370DB !important;
+  stroke-width: 2px !important;
+}
+
+.pretty-mermaid-classic .classGroup .title {
+  font-weight: bold !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+}
+
+.pretty-mermaid-classic .classGroup .classTitle {
+  font-weight: bold !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+  fill: #333 !important;
+}
+
+.pretty-mermaid-classic .relation .relationText {
+  fill: #333 !important;
+  font-family: "trebuchet ms", verdana, arial, sans-serif !important;
+}
+
+/* Monochrome Theme */
+.pretty-mermaid-enhanced.pretty-mermaid-monochrome {
+  border: 1px solid #d1d5db;
+  background: #f9fafb !important;
+}
+
+.pretty-mermaid-monochrome .node rect,
+.pretty-mermaid-monochrome .node circle,
+.pretty-mermaid-monochrome .node ellipse,
+.pretty-mermaid-monochrome .node polygon {
+  fill: #ffffff !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .node .label {
+  color: #374151 !important;
+}
+
+.pretty-mermaid-monochrome .edgePath .path {
+  stroke: #9ca3af !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .edgeLabel {
+  background: #ffffff !important;
+  color: #6b7280 !important;
+}
+
+/* Sequence diagram styling */
+.pretty-mermaid-monochrome .actor {
+  fill: #ffffff !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .actor-line {
+  stroke: #9ca3af !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .messageLine0,
+.pretty-mermaid-monochrome .messageLine1 {
+  stroke: #9ca3af !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .messageText {
+  fill: #374151 !important;
+}
+
+.pretty-mermaid-monochrome .loopText {
+  fill: #374151 !important;
+}
+
+.pretty-mermaid-monochrome .loopLine {
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .note {
+  fill: #f3f4f6 !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .activation0,
+.pretty-mermaid-monochrome .activation1,
+.pretty-mermaid-monochrome .activation2 {
+  fill: #f9fafb !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+/* Gantt chart styling */
+.pretty-mermaid-monochrome .section0,
+.pretty-mermaid-monochrome .section1,
+.pretty-mermaid-monochrome .section2 {
+  fill: #ffffff !important;
+  stroke: #6b7280 !important;
+}
+
+.pretty-mermaid-monochrome .task0,
+.pretty-mermaid-monochrome .task1,
+.pretty-mermaid-monochrome .task2,
+.pretty-mermaid-monochrome .task3 {
+  fill: #ffffff !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .taskText0,
+.pretty-mermaid-monochrome .taskText1,
+.pretty-mermaid-monochrome .taskText2,
+.pretty-mermaid-monochrome .taskText3,
+.pretty-mermaid-monochrome .taskTextOutsideRight,
+.pretty-mermaid-monochrome .taskTextOutsideLeft {
+  fill: #374151 !important;
+}
+
+.pretty-mermaid-monochrome .today {
+  fill: none !important;
+  stroke: #ef4444 !important;
+  stroke-width: 2px !important;
+}
+
+/* Class diagram styling */
+.pretty-mermaid-monochrome .classBox {
+  fill: #ffffff !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .classTitleText {
+  fill: #374151 !important;
+  font-weight: bold !important;
+}
+
+.pretty-mermaid-monochrome .classText {
+  fill: #374151 !important;
+}
+
+.pretty-mermaid-monochrome .relation {
+  stroke: #9ca3af !important;
+  stroke-width: 1px !important;
+}
+
+/* State diagram styling */
+.pretty-mermaid-monochrome .state-start,
+.pretty-mermaid-monochrome .state-end {
+  fill: #6b7280 !important;
+}
+
+.pretty-mermaid-monochrome .statediagram-state rect {
+  fill: #ffffff !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .transition {
+  stroke: #9ca3af !important;
+  stroke-width: 1px !important;
+}
+
+/* Pie chart styling */
+.pretty-mermaid-monochrome .pieTitleText {
+  fill: #374151 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.pretty-mermaid-monochrome .slice {
+  stroke-width: 1px !important;
+  stroke: white !important;
+}
+
+/* ER diagram styling */
+.pretty-mermaid-monochrome .er.entityBox {
+  fill: #ffffff !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .er.attributeBoxEven,
+.pretty-mermaid-monochrome .er.attributeBoxOdd {
+  fill: #f9fafb !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+/* Subgraph styling */
+.pretty-mermaid-monochrome .cluster rect {
+  fill: #f3f4f6 !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+  rx: 5px !important;
+}
+
+.pretty-mermaid-monochrome .cluster .cluster-label {
+  fill: #374151 !important;
+  font-weight: bold !important;
+}
+
+.pretty-mermaid-monochrome .cluster text {
+  fill: #374151 !important;
+}
+
+/* Flowchart specific styling (extends node styling) */
+.pretty-mermaid-monochrome .flowchart-link {
+  stroke: #9ca3af !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .marker {
+  fill: #9ca3af !important;
+  stroke: #9ca3af !important;
+}
+
+/* Class diagram specific elements */
+.pretty-mermaid-monochrome .classGroup rect {
+  fill: #ffffff !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+.pretty-mermaid-monochrome .classGroup .title {
+  font-weight: bold !important;
+}
+
+.pretty-mermaid-monochrome .classGroup .classTitle {
+  font-weight: bold !important;
+  fill: #374151 !important;
+}
+
+.pretty-mermaid-monochrome .relation .relationText {
+  fill: #374151 !important;
+}
+
+/* Dark theme adjustments for Monochrome theme */
+.theme-dark .pretty-mermaid-monochrome {
+  background: #1f2937 !important;
+  border-color: #374151;
+}
+
+.theme-dark .pretty-mermaid-monochrome .node rect,
+.theme-dark .pretty-mermaid-monochrome .node circle,
+.theme-dark .pretty-mermaid-monochrome .node ellipse,
+.theme-dark .pretty-mermaid-monochrome .node polygon {
+  fill: #374151 !important;
+  stroke: #6b7280 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .node .label {
+  color: #f3f4f6 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .edgePath .path {
+  stroke: #9ca3af !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .edgeLabel {
+  background: #374151 !important;
+  color: #d1d5db !important;
+}
+
+/* Dark theme sequence diagram styling */
+.theme-dark .pretty-mermaid-monochrome .actor {
+  fill: #374151 !important;
+  stroke: #6b7280 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .messageText,
+.theme-dark .pretty-mermaid-monochrome .loopText {
+  fill: #f3f4f6 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .note {
+  fill: #4b5563 !important;
+  stroke: #6b7280 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .activation0,
+.theme-dark .pretty-mermaid-monochrome .activation1,
+.theme-dark .pretty-mermaid-monochrome .activation2 {
+  fill: #374151 !important;
+}
+
+/* Dark theme gantt chart styling */
+.theme-dark .pretty-mermaid-monochrome .section0,
+.theme-dark .pretty-mermaid-monochrome .section1,
+.theme-dark .pretty-mermaid-monochrome .section2 {
+  fill: #374151 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .task0,
+.theme-dark .pretty-mermaid-monochrome .task1,
+.theme-dark .pretty-mermaid-monochrome .task2,
+.theme-dark .pretty-mermaid-monochrome .task3 {
+  fill: #374151 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .taskText0,
+.theme-dark .pretty-mermaid-monochrome .taskText1,
+.theme-dark .pretty-mermaid-monochrome .taskText2,
+.theme-dark .pretty-mermaid-monochrome .taskText3,
+.theme-dark .pretty-mermaid-monochrome .taskTextOutsideRight,
+.theme-dark .pretty-mermaid-monochrome .taskTextOutsideLeft {
+  fill: #f3f4f6 !important;
+}
+
+/* Dark theme class diagram styling */
+.theme-dark .pretty-mermaid-monochrome .classBox {
+  fill: #374151 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .classTitleText,
+.theme-dark .pretty-mermaid-monochrome .classText {
+  fill: #f3f4f6 !important;
+}
+
+/* Dark theme state diagram styling */
+.theme-dark .pretty-mermaid-monochrome .statediagram-state rect {
+  fill: #374151 !important;
+}
+
+/* Dark theme pie chart styling */
+.theme-dark .pretty-mermaid-monochrome .pieTitleText {
+  fill: #f3f4f6 !important;
+}
+
+/* Dark theme ER diagram styling */
+.theme-dark .pretty-mermaid-monochrome .er.entityBox {
+  fill: #374151 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .er.attributeBoxEven,
+.theme-dark .pretty-mermaid-monochrome .er.attributeBoxOdd {
+  fill: #4b5563 !important;
+}
+
+/* Dark theme subgraph styling */
+.theme-dark .pretty-mermaid-monochrome .cluster rect {
+  fill: #4b5563 !important;
+  stroke: #6b7280 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .cluster .cluster-label,
+.theme-dark .pretty-mermaid-monochrome .cluster text {
+  fill: #f3f4f6 !important;
+}
+
+/* Dark theme flowchart styling */
+.theme-dark .pretty-mermaid-monochrome .flowchart-link {
+  stroke: #9ca3af !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .marker {
+  fill: #9ca3af !important;
+  stroke: #9ca3af !important;
+}
+
+/* Dark theme class diagram styling */
+.theme-dark .pretty-mermaid-monochrome .classGroup rect {
+  fill: #374151 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .classGroup .title,
+.theme-dark .pretty-mermaid-monochrome .classGroup .classTitle {
+  fill: #f3f4f6 !important;
+}
+
+.theme-dark .pretty-mermaid-monochrome .relation .relationText {
+  fill: #f3f4f6 !important;
+}

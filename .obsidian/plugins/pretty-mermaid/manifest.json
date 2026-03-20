@@ -1,0 +1,10 @@
+{
+	"id": "pretty-mermaid",
+	"name": "Pretty Mermaid",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Make your Mermaid diagrams actually pretty. Enhances default Mermaid rendering with better styling, colors, and smooth appearance.",
+	"author": "Calvin Ku & Claude",
+	"authorUrl": "https://github.com/calvinku/pretty-mermaid",
+	"isDesktopOnly": false
+}
