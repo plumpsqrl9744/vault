@@ -68,6 +68,28 @@ flowchart TD
 * **⑤ Teensy ↔ 펌프/홀더 모터 : 트랜시버 경유**
 	* 물공급 펌프 L/R, 홀더 Index 모터 L/R, 홀더 상하 모터 — 각각 트랜시버(C/L/R) 경유 제어. 구체 프로토콜 미확정 [UNCLEAR] (CAN 공유 버스 또는 개별 드라이버).
 
+## micro-ROS Arduino 구현 참고 (Teensy 펌웨어)
+
+> 출처: [micro-ROS/micro_ros_arduino](https://github.com/micro-ROS/micro_ros_arduino) README (2026-07-03 확인)
+
+* **Teensy 4.1 공식 지원** — Supported 상태 (Teensy 4.0은 Not tested). Teensyduino 1.58.x 기반, 라이브러리 최소 v1.8.5.
+* **설치**: 릴리스 페이지에서 ZIP 다운로드 → Arduino IDE `Sketch → Include Library → Add .ZIP Library...`
+* **Teensyduino 패치 필수** — `platform.txt`를 micro_ros_arduino의 patched 버전으로 교체해야 빌드됨:
+	```bash
+	export TEENSYDUINO_VERSION=[버전]
+	export ARDUINO_PATH=[경로]
+	cd $ARDUINO_PATH/hardware/avr/$TEENSYDUINO_VERSION/
+	curl https://raw.githubusercontent.com/micro-ROS/micro_ros_arduino/main/extras/patching_boards/platform_teensy.txt > platform.txt
+	```
+* **Transport**: README 기준 "Only USB serial transports are provided" — 우리 설계(RPi5↔Teensy USB 시리얼)와 정확히 일치. Wi-Fi transport는 일부 보드(ESP32 계열)용이라 Teensy에선 고려 대상 아님.
+* **Agent 실행 (RPi5 쪽)** — Docker 한 줄:
+	```bash
+	docker run -it --rm -v /dev:/dev --privileged --net=host \
+	  microros/micro-ros-agent:humble serial --dev [보드 포트] -v6
+	```
+	* ROS2 버전 태그(humble/kilted 등)를 RPi5의 ROS2 배포판과 맞출 것. Ubuntu 22.04면 **humble**이 정합.
+* **주의**: precompiled 라이브러리는 **정적 메모리 풀이 사전 구성**돼 있음 — 노드/토픽/서비스 수가 기본 한도를 넘으면 colcon.meta 조정 후 재빌드 필요. 예제는 repo `examples/` 폴더 참조.
+
 ## 기존 구상에서 달라진 점
 
 | 항목 | 기존 ([[ERUT]]) | 확정 아키텍처 |
