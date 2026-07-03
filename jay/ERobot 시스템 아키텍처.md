@@ -89,6 +89,54 @@ flowchart TD
 	```
 	* ROS2 버전 태그(humble/kilted 등)를 RPi5의 ROS2 배포판과 맞출 것. Ubuntu 22.04면 **humble**이 정합.
 * **주의**: precompiled 라이브러리는 **정적 메모리 풀이 사전 구성**돼 있음 — 노드/토픽/서비스 수가 기본 한도를 넘으면 colcon.meta 조정 후 재빌드 필요. 예제는 repo `examples/` 폴더 참조.
+* **펌웨어 주입(업로드) 방식** — Teensy를 개발 PC에 직결하지 않고 **RPi5 경유**로 배포:
+	* 개발 PC → (이더넷) → **RPi5에 SSH 접속** → 펌웨어 파일 전송 → RPi5 ↔ Teensy **USB 연결**로 주입. (전송→전송→주입의 릴레이 방식)
+	* Why: 로봇이 IP65 케이싱에 밀폐돼 있어 Teensy USB 포트에 물리 접근이 어려움 — 케이싱 안 RPi5·Teensy가 이미 USB로 물려 있으니 그 선을 업로드 경로로 재사용.
+	* RPi5 쪽에서 Teensy CLI 업로더(`teensy_loader_cli` 계열)로 주입하는 형태 — 구체 도구 확정 시 갱신 [UNCLEAR].
+
+## Teensy 펌웨어의 역할 경계 — micro-ROS는 어디까지 해주나
+
+> 핵심: **micro-ROS는 통신(귀)까지만, 전기 신호(손)는 직접 구현.**
+
+```
+[RPi5 ROS2 토픽] ──micro-ROS가 배달──> [Teensy 콜백 함수]
+                                            │  ← 여기부터 직접 작성
+                                            ▼
+                              [CAN 프레임 / PWM / GPIO 전기 신호]
+```
+
+* **micro-ROS 라이브러리** : ROS2 토픽/서비스를 시리얼로 직렬화해 주고받는 **통신 계층만** 제공. "cmd_vel 도착 → 콜백 호출"까지가 끝. 모터 제어 방법은 **기재돼 있지 않음**.
+* 전기 신호를 보내는 방법은 소스 3개에서 나옴:
+
+***① 바퀴 모터 정답지 = DJI C620 사용자 매뉴얼***
+* C620의 CAN 프로토콜이 매뉴얼에 표로 정의됨:
+	* **제어** : CAN ID `0x200` 프레임 8바이트에 모터 1~4번 전류 명령을 16bit씩 (-16384~16384 = -20A~20A)
+	* **피드백** : 각 모터가 `0x201`~`0x204`로 회전자 각도·RPM·실제 전류·온도 송신
+* "어떤 바이트를 어떤 ID로 보내면 도는가"는 전부 이 매뉴얼이 정의.
+
+***② Teensy에서 CAN 송신 = FlexCAN_T4 라이브러리***
+* Teensy 4.x 내장 CAN 컨트롤러용 사실상 표준 Arduino 라이브러리.
+```cpp
+#include <FlexCAN_T4.h>
+FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16> can1;
+
+// micro-ROS 콜백: cmd_vel 수신 → CAN 프레임 송신
+void cmd_vel_callback(const void *msgin) {
+  int16_t current = velocity_to_current(msg->linear.x);  // 직접 작성하는 변환
+  CAN_message_t frame;
+  frame.id = 0x200;                    // ← C620 매뉴얼이 정의한 ID
+  frame.buf[0] = current >> 8;         // 모터1 전류 상위 바이트
+  frame.buf[1] = current & 0xFF;       // 하위 바이트
+  can1.write(frame);                   // ← 전기 신호는 여기서 출발
+}
+```
+* 실제 전압 레벨(differential)은 **CAN 트랜시버 칩이 하드웨어로** 처리 — 코드는 프레임만 넘기면 됨. 다이어그램의 '트랜시버' 박스가 이 역할.
+
+***③ 펌프·홀더 모터 = 해당 드라이버 데이터시트***
+* CAN이 아니면 대개 PWM(`analogWrite`) 또는 GPIO(`digitalWrite`) — 핀·신호 규격은 각 드라이버 데이터시트가 정의. (드라이버 미확정 [UNCLEAR])
+
+***펌웨어 뼈대 한 줄***
+`micro-ROS 구독 콜백 → 값 변환(속도→전류) → FlexCAN_T4 송신` + 통신 두절 감지 시 전류 0 (Watchdog).
 
 ## 기존 구상에서 달라진 점
 
