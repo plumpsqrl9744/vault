@@ -61,6 +61,25 @@ ERobot 제어, 하드웨어 제어 앱 개발 스택 선정
 3. **UI 연동** — `useTcpSocket` 커스텀 훅을 만들어 각 버튼(조이스틱, 펌프 토글)에서 함수 호출.
 4. **상태 모니터링** — 로봇이 보내는 응답값을 읽어 Zustand에 저장하고 UI에 실시간 반영.
 
+***pnpm 세팅 (Expo 프로젝트)***
+* **프로젝트 생성**
+	```bash
+	pnpm create expo-app my-robot-app
+	cd my-robot-app
+	```
+* **필수 설정: `.npmrc`** (프로젝트 루트에 생성)
+	```text
+	node-linker=hoisted
+	```
+	* 이유 : pnpm은 기본적으로 의존성을 심볼릭 링크로 격리 관리하는데, **React Native의 네이티브 빌드 도구(Metro Bundler 등)는 전통적인 평탄한 node_modules 구조를 기대**함. 이 설정으로 강제로 맞춰주는 것.
+	* 트레이드오프 : hoisted로 하면 pnpm의 strict(유령 의존성 차단) 이점은 일부 반납 — RN에서는 어쩔 수 없는 호환 비용.
+* **주요 명령어** : `pnpm add [패키지]` / `pnpm add -D` / `pnpm remove` / `pnpm start` (npm과 거의 동일)
+* **빌드 오류 트러블슈팅** (react-native-tcp-socket 등 네이티브 라이브러리 추가 후)
+	1. `.npmrc`에 `node-linker=hoisted` 있는지 확인
+	2. `rm -rf node_modules && pnpm install` (의존성 재설치)
+	3. `npx pod-install` (iOS 의존성 동기화)
+* **핵심** : 프로젝트 **시작 시점**에 `.npmrc` 설정을 잊지 않는 것. 나중에 바꾸면 재설치 필요.
+
 ***개발 순서 (팁)***
 * 로봇 제어 앱은 **'하드웨어와 앱의 신뢰성'이 90%**.
 * 복잡한 기능부터 만들지 말고, **[버튼 하나 → Teensy에 연결된 LED 켜기]** 라는 가장 단순한 통신 성공을 먼저 확보할 것. 그다음이 바퀴와 관찰 렌즈.
